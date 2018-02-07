@@ -1,0 +1,11 @@
+-create MakeFile that loops through all regions we want to support looks up AMIs for CentOS, Ubuntu, Amazon and then creates an AMI.tf file in each env
+-add to MakeFile ability to create global vars file that is copied to each env (avoid some copy/pasta between envs) --- optionally we can sym link the files to each env??? OR use TF env function??
+- look at using vault provider for secrets
+-better way to handle keys per regions
+-handle deploy of keys to bastion to allow priv instance access (automated)
+-swap out NAT gateways in non-prod envs with plan ole NAT instances to avoid high AWS charges; use NAT GW only in prod
+- bootstrap/userdata --> eventually move to using CM like ansible for this as well as pre-baked AMIs via packer
+
+DONE:
+-convetrt to templates for user-data scripts instead of files (kill off heredoc where I can)
+-get secrets out of the tf files (prompt for via variables instead; can set env vars if needed)
