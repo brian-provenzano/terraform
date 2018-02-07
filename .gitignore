@@ -1,0 +1,30 @@
+vscode 
+############
+.vscode
+.vscode/
+
+# terraform #
+#####################
+# Compiled files
+*.tfstate
+*.tfstate.backup
+
+.tfplan
+
+awskeynames.tf
+
+# Module directory
+.terraform/
+
+# keys - just in case; really should not be here but this is CYA territory #
+#######################
+*.pem
+
+####MISC#####
+
+#ignore log files
+*.log
+
+###
+*.asc
+
