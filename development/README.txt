@@ -1,1 +1,1 @@
-This dir represents our staging environment in terraform.
+This dir represents our dev environment in terraform.
