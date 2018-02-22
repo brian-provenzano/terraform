@@ -98,6 +98,7 @@ variable "region_uswest1" {
   description = "uswest1 region"
   default = "us-west-1"
 }
+
 # Declare the data source
 #data "aws_availability_zones" "available" {}
 
@@ -140,7 +141,10 @@ variable "centos7_amis" {
   }
 }
 # Keys
-# <<redacted>>
+variable "key_name_uswest1" {}
+variable "key_file_uswest1" {}
+variable "aws_uswest1_sharedcredentialsfile" {}
+variable "aws_uswest1_sharedcredentialsprofile" {}
 
 # ---Our Custom AMIs via Packer
 # TODO

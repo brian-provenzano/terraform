@@ -8,6 +8,8 @@ terraform {
 # ------------------------------------------------------------------------------
 provider "aws" {
   region = "${var.region_uswest1}"
+  shared_credentials_file = "${var.aws_uswest1_sharedcredentialsfile}"
+  profile = "${var.aws_uswest1_sharedcredentialsprofile}"
 }
 
 # ROUTE53 -- TODO put this global... just playing now

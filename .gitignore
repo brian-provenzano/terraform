@@ -12,6 +12,7 @@ vscode
 .tfplan
 
 awskeynames.tf
+terraform.tfvars
 
 # Module directory
 .terraform/
