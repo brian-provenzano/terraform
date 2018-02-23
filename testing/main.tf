@@ -7,9 +7,14 @@ terraform {
 # CONFIGURE AWS CONNECTION (PROVIDER)
 # ------------------------------------------------------------------------------
 provider "aws" {
+  version = "~> 1.9"
   region = "${var.region_uswest1}"
   shared_credentials_file = "${var.aws_uswest1_sharedcredentialsfile}"
   profile = "${var.aws_uswest1_sharedcredentialsprofile}"
+}
+
+provider "template" {
+  version = "~> 1.0"
 }
 
 # ROUTE53 -- TODO put this global... just playing now
@@ -60,6 +65,7 @@ module "networking" {
   availability_zones = ["${var.azs_uswest1}"]
   database_privatesubnet_cidrs = ["${var.private_db_subnet_one_cidr}","${var.private_db_subnet_two_cidr}"]
   enable_natgateway = "true"
+  enable_bastion = "true"
   #TODO - add option for nat instances only for cheap dev/testing env??
 
   tags { 

@@ -13,12 +13,20 @@ output "webserver_port" {
 output "bastion_security_group_id" {
   value = "${aws_security_group.ssh_bastion_instance.id}"
 }
+
+# output "bastion_elasticip_id" {
+#   value = "${aws_eip.bastion.id}"
+# }
 output "bastion_elasticip_id" {
-  value = "${aws_eip.bastion.id}"
+  value =  "${element(split(",", join(",", aws_eip.bastion.*.id)), 0)}"
 }
+# output "bastion_elasticip" {
+#   value = "${aws_eip.bastion.public_ip}"
+# }
 output "bastion_elasticip" {
-  value = "${aws_eip.bastion.public_ip}"
+  value = "${element(split(",", join(",", aws_eip.bastion.*.public_ip)), 0)}"
 }
+
 output "rds_security_group_id" {
   value = "${aws_security_group.rds_instance.id}"
 }
@@ -40,12 +48,24 @@ output "private_subnets" {
 output "database_subnets" {
   value = ["${aws_subnet.private_database.*.id}"]
 }
+
+# output "database_subnet_group_id" {
+#   value = "${aws_db_subnet_group.database_group.id}"
+# }
 output "database_subnet_group_id" {
-  value = "${aws_db_subnet_group.database_group.id}"
+  value = "${element(split(",", join(",", aws_db_subnet_group.database_group.*.id)), 0)}"
 }
+# output "database_subnet_group_name" {
+#   value = "${aws_db_subnet_group.database_group.name}"
+# }
 output "database_subnet_group_name" {
-  value = "${aws_db_subnet_group.database_group.name}"
+  value = "${element(split(",", join(",", aws_db_subnet_group.database_group.*.name)), 0)}"
 }
+
+
+
+
+
 
 # output "public_subnetone_id" {
 #   value = "${aws_subnet.main_publicsubnet_one.id}"
