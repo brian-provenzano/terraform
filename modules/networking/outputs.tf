@@ -66,7 +66,7 @@ output "database_subnet_group_name" {
 
 
 
-
+###  Deprecated - remove this 
 # output "public_subnetone_id" {
 #   value = "${aws_subnet.main_publicsubnet_one.id}"
 # }

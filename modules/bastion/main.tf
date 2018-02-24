@@ -54,7 +54,7 @@ resource "aws_launch_configuration" "bastion" {
   }
   iam_instance_profile = "${var.lc_iam_eip_instanceprofile}"
   key_name = "${var.lc_keyname}"
-  # use amazon linux mainly b/c it comes shipped with aws cli
+  # use amazon linux for bastions - mainly b/c it comes shipped with aws cli
   image_id = "${var.lc_imageid}"
   instance_type = "t2.micro" #hardcoded on purpose; don't need more than this
   security_groups = ["${var.lc_securitygroups}"]
@@ -70,6 +70,20 @@ resource "aws_launch_configuration" "bastion" {
   lifecycle {
     create_before_destroy = true
   }
+
+
+#testing : hardcode for now - make these configurable inputs!!
+  # provisioner "file" {
+  # source      = "my.pem"
+  # destination = "/home/ec2user/my.pem"
+
+  # connection {
+  #   type     = "ssh"
+  #   user     = "ec2user"
+  #   private_key = "${file("my.pem")}"
+  # }
+#}
+
 }
 
 #create route53 record entry for bastion for name access

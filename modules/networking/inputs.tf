@@ -49,6 +49,8 @@ variable "enable_bastion" {
   description = "Set this true if you want bastion to be created"
 }
 
+
+#Deprecated - remove this
 # variable "publicsubnet_one_cidr" {
 #   description = "The CIDR of public subnet one"
 
