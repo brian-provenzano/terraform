@@ -24,7 +24,7 @@ data "template_file" "bastion_userdata" {
   template = "${file("../global/files/bootstraps/config-bastion.txt")}"
   vars {
     bastion_elasticip_id = "${module.networking.bastion_elasticip_id}"
-    region_eip = "${var.region_uswest1}"
+    region_eip = "${var.region_uswest2}"
   }
 }
 data "template_file" "webservers_userdata" {
@@ -134,10 +134,10 @@ variable "amzlinux_amis" {
 # CentOS 7 - this is a marketplace AMI (requires presign agreement)
 variable "centos7_amis" {
   default = {
-    type = "map"
-    us-east-2 = "ami-18f8df7d"
-    us-west-1 = "ami-f5d7f195"
-    us-west-2 = "ami-f4533694"
+    type = "map"               #new images 1801_01 1/14/2018
+    us-east-2 = "ami-18f8df7d" #ami-e1496384
+    us-west-1 = "ami-f5d7f195" #ami-65e0e305
+    us-west-2 = "ami-f4533694" #ami-a042f4d8
   }
 }
 # Keys
@@ -158,9 +158,20 @@ variable "region_uswest2" {
   description = "uswest2 region"
   default = "us-west-2"
 }
-# Keys
-# <<redacted>>
 
+#AZs for this region
+variable "azs_uswest2" {
+  type = "list"
+  description = "uswest2 availability zones"
+  default = ["us-west-2a","us-west-2b"]
+  #default = ["${data.aws_availability_zones.available.names}"]
+}
+
+# Keys
+variable "key_name_uswest2" {}
+variable "key_file_uswest2" {}
+variable "aws_uswest2_sharedcredentialsfile" {}
+variable "aws_uswest2_sharedcredentialsprofile" {}
 
 # ---------------------
 # US-EAST-2 (OH) region

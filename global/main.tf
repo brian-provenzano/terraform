@@ -10,7 +10,7 @@ provider "aws"{
 # S3 buckets
 # ---------------------------------
 
-
+#TODO - create the route53 domain; s3 bucket; dynamodb table for locking
 
 # TERRAFORM STATE Bucket
 # resource "aws_s3_bucket" "terraform_state" {

@@ -8,9 +8,9 @@ terraform {
 # ------------------------------------------------------------------------------
 provider "aws" {
   version = "~> 1.9"
-  region = "${var.region_uswest1}"
-  shared_credentials_file = "${var.aws_uswest1_sharedcredentialsfile}"
-  profile = "${var.aws_uswest1_sharedcredentialsprofile}"
+  region = "${var.region_uswest2}"
+  shared_credentials_file = "${var.aws_uswest2_sharedcredentialsfile}"
+  profile = "${var.aws_uswest2_sharedcredentialsprofile}"
 }
 
 provider "template" {
@@ -62,7 +62,7 @@ module "networking" {
   vpc_cidr = "${var.vpc_cidr}"
   publicsubnet_cidrs = ["${var.publicsubnet_one_cidr}","${var.publicsubnet_two_cidr}"]
   privatesubnet_cidrs = ["${var.privatesubnet_one_cidr}","${var.privatesubnet_two_cidr}"]
-  availability_zones = ["${var.azs_uswest1}"]
+  availability_zones = ["${var.azs_uswest2}"]
   database_privatesubnet_cidrs = ["${var.private_db_subnet_one_cidr}","${var.private_db_subnet_two_cidr}"]
   enable_natgateway = "true"
   enable_bastion = "true"
@@ -92,10 +92,10 @@ module "bastion" {
   #tags = ""
   asg_subnets = ["${module.networking.public_subnets}"]
   lc_iam_eip_instanceprofile = "${aws_iam_instance_profile.EC2ManageEIP.id}"
-  lc_keyname = "${var.key_name_uswest1}"
-  lc_keyfile = "${var.key_file_uswest1}"
+  lc_keyname = "${var.key_name_uswest2}"
+  lc_keyfile = "${var.key_file_uswest2}"
   lc_instanceuser = "ec2-user"
-  lc_imageid = "${lookup(var.amzlinux_amis, var.region_uswest1)}"
+  lc_imageid = "${lookup(var.amzlinux_amis, var.region_uswest2)}"
   lc_securitygroups = ["${module.networking.bastion_security_group_id}"]
   lc_userdata = "${data.template_file.bastion_userdata.rendered}"
 }
@@ -115,11 +115,11 @@ module "asg_webservers" {
   asg_elbcapacity = 2
   #asg_subnets = ["${module.networking.private_subnetone_id}","${module.networking.private_subnettwo_id}"]
   asg_subnets = ["${module.networking.private_subnets}"]
-  lc_keyname = "${var.key_name_uswest1}"
-  lc_keyfile = "${var.key_file_uswest1}"
+  lc_keyname = "${var.key_name_uswest2}"
+  lc_keyfile = "${var.key_file_uswest2}"
   lc_instancetype = "t2.micro"
   lc_instanceuser = "ubuntu"
-  lc_imageid = "${lookup(var.ubuntu1604_amis, var.region_uswest1)}"
+  lc_imageid = "${lookup(var.ubuntu1604_amis, var.region_uswest2)}"
   lc_securitygroups = ["${module.networking.clusterweb_security_group_id}"]
   lc_userdata = "${data.template_file.webservers_userdata.rendered}"
   elb_securitygroups = ["${module.networking.clusterweb_elb_security_group_id}"]
