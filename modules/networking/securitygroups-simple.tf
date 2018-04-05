@@ -2,6 +2,13 @@
 # resource "aws_security_group" "ssh_web_instance" {
 #   name = "ssh-http-only-restricted"
 #   vpc_id = "${aws_vpc.main.id}"
+#   # Inbound HTTPS
+#   ingress {
+#     from_port = "${var.webserver_port}"
+#     to_port = "${var.webserver_port}"
+#     protocol = "tcp"
+#     cidr_blocks = ["${var.home_publicaddress}"]
+#   }
 #   # Inbound HTTP
 #   ingress {
 #     from_port = "${var.webserver_port}"
@@ -31,3 +38,4 @@
 #       cidr_blocks = ["0.0.0.0/0"]
 #     }
 # }
+
